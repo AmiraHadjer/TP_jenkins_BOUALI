@@ -11,7 +11,7 @@ pipeline {
     }
     stage('hello') {
       steps {
-        echo 'hello'
+        echo 'hello2'
       }
     }
   }
