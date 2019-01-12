@@ -1,6 +1,21 @@
 pipeline {
   agent any
   stages {
+    
+    stage('Build') {
+      steps {
+        sh 'gradle build'
+        }
+        post {
+          always {
+          echo "Build stage complete" }
+          failure {
+          echo "Build failed"}
+          success {
+          echo "Build succeeded" }
+        }
+      }
+    
     stage('sending mail') {
       parallel {
         stage('sending mail') {
@@ -14,7 +29,7 @@ pipeline {
         stage('sonarQ') {
           steps {
             withSonarQubeEnv('TP8') {
-              waitForQualityGate true
+             
             }
 
           }
