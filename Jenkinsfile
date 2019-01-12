@@ -4,7 +4,7 @@ pipeline {
     stage('sending mail') {
       steps {
         timeout(time: 200, unit: 'SECONDS') {
-          emailext(subject: 'test2', body: 'yeeeessss')
+          emailext(subject: 'test2', body: 'yeeeessss', replyTo: 'fa_bouali@esi.dz', to: 'amihadjer@gmail.com')
         }
 
       }
