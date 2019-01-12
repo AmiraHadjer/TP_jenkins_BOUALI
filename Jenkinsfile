@@ -14,6 +14,11 @@ pipeline {
         echo 'hello2'
       }
     }
+    stage('sonar') {
+      steps {
+        waitForQualityGate true
+      }
+    }
   }
   options {
     timeout(time: 10, unit: 'MINUTES')
