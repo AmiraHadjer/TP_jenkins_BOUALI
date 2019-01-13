@@ -1,21 +1,28 @@
 pipeline {
   agent any
   stages {
-    
     stage('Build') {
-      steps {
-        sh 'gradle build'
+      post {
+        always {
+          echo 'Build stage complete'
+
         }
-        post {
-          always {
-          echo "Build stage complete" }
-          failure {
-          echo "Build failed"}
-          success {
-          echo "Build succeeded" }
+
+        failure {
+          echo 'Build failed'
+
         }
+
+        success {
+          echo 'Build succeeded'
+
+        }
+
       }
-    
+      steps {
+        bat 'C:\\gradle-4.10.2-all\\gradle-4.10.2\\bin\\gradle.bat'
+      }
+    }
     stage('sending mail') {
       parallel {
         stage('sending mail') {
@@ -28,10 +35,7 @@ pipeline {
         }
         stage('sonarQ') {
           steps {
-            withSonarQubeEnv('TP8') {
-             
-            }
-
+            withSonarQubeEnv 'TP8'
           }
         }
       }
